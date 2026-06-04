@@ -36,4 +36,19 @@ class GerenciadorDeComandosTest {
         assertEquals("FATURADO", pedido.getStatus());
     }
 
+    @Test
+    void deveDesfazerFaturamentoDoPedidoRetornandoParaAprovado() {
+        Comando aprovar = new ComandoAprovarPedido(pedido);
+        Comando faturar = new ComandoFaturarPedido(pedido);
+
+        gerenciador.executarComando(aprovar);
+        gerenciador.executarComando(faturar);
+
+
+        gerenciador.desfazerUltimoComando();
+
+
+        assertEquals("APROVADO", pedido.getStatus());
+    }
+
 }
