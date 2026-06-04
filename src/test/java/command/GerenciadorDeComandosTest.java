@@ -24,6 +24,16 @@ class GerenciadorDeComandosTest {
 
     }
 
+    @Test
+    void deveFaturarPedido() {
 
+        Comando aprovar = new ComandoAprovarPedido(pedido);
+        Comando faturar = new ComandoFaturarPedido(pedido);
+
+        gerenciador.executarComando(aprovar);
+        gerenciador.executarComando(faturar);
+
+        assertEquals("FATURADO", pedido.getStatus());
+    }
 
 }
